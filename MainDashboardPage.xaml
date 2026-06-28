@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FACE.MainDashboardPage"
+             BackgroundColor="#F4F7F5"
+             Title="Early Warning Landslide">
+
+    <ScrollView>
+        <Grid RowDefinitions="Auto,Auto,*"
+              Padding="28"
+              RowSpacing="22">
+
+            <Grid Grid.Row="0"
+                  ColumnDefinitions="*,Auto"
+                  ColumnSpacing="18">
+                <VerticalStackLayout Spacing="4">
+                    <Label Text="Early Warning Landslide"
+                           FontSize="28"
+                           FontAttributes="Bold"
+                           TextColor="#123026" />
+
+                    <Label x:Name="LabelUserRole"
+                           Text="Sesi pengguna"
+                           FontSize="14"
+                           TextColor="#5B6B63" />
+
+                    <Label x:Name="LabelDatabasePath"
+                           Text="Database"
+                           FontSize="12"
+                           TextColor="#8A9790" />
+                </VerticalStackLayout>
+
+                <Button Grid.Column="1"
+                        Text="Logout"
+                        BackgroundColor="#EF4444"
+                        TextColor="White"
+                        CornerRadius="8"
+                        VerticalOptions="Start"
+                        Clicked="OnLogoutClicked" />
+            </Grid>
+
+            <Grid Grid.Row="1"
+                  ColumnDefinitions="*,*,*"
+                  ColumnSpacing="16">
+
+                <Border BackgroundColor="White"
+                        Stroke="#DCE5DF"
+                        StrokeThickness="1"
+                        Padding="22"
+                        StrokeShape="RoundRectangle 14">
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="Kelembapan Air"
+                               FontSize="15"
+                               TextColor="#5B6B63" />
+
+                        <Label x:Name="LabelWaterHumidity"
+                               Text="76%"
+                               FontSize="34"
+                               FontAttributes="Bold"
+                               TextColor="#123026" />
+
+                        <Label Text="Sensor area lereng atas"
+                               FontSize="13"
+                               TextColor="#8A9790" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border Grid.Column="1"
+                        BackgroundColor="White"
+                        Stroke="#DCE5DF"
+                        StrokeThickness="1"
+                        Padding="22"
+                        StrokeShape="RoundRectangle 14">
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="Getaran"
+                               FontSize="15"
+                               TextColor="#5B6B63" />
+
+                        <Label x:Name="LabelVibrationLevel"
+                               Text="2.8 mm/s"
+                               FontSize="34"
+                               FontAttributes="Bold"
+                               TextColor="#123026" />
+
+                        <Label Text="Sensor vibration area lereng"
+                               FontSize="13"
+                               TextColor="#8A9790" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border Grid.Column="2"
+                        BackgroundColor="#FFF8E1"
+                        Stroke="#F7C948"
+                        StrokeThickness="1"
+                        Padding="22"
+                        StrokeShape="RoundRectangle 14">
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="Status"
+                               FontSize="15"
+                               TextColor="#6B4E16" />
+
+                        <Label x:Name="LabelAlertStatus"
+                               Text="Siaga"
+                               FontSize="34"
+                               FontAttributes="Bold"
+                               TextColor="#7A4A00" />
+
+                        <Label x:Name="LabelStatusDescription"
+                               Text="Kelembapan tinggi. Warga diminta tetap waspada."
+                               FontSize="13"
+                               TextColor="#6B4E16" />
+
+                        <Label x:Name="LabelAiExplanation"
+                               Text="AI sedang menyiapkan penjelasan."
+                               FontSize="13"
+                               TextColor="#6B4E16" />
+                    </VerticalStackLayout>
+                </Border>
+            </Grid>
+
+            <VerticalStackLayout Grid.Row="2"
+                                 Spacing="16">
+                <Border BackgroundColor="White"
+                        Stroke="#DCE5DF"
+                        StrokeThickness="1"
+                        Padding="22"
+                        StrokeShape="RoundRectangle 14">
+                    <VerticalStackLayout Spacing="12">
+                        <Label Text="Analisis AI untuk Warga"
+                               FontSize="20"
+                               FontAttributes="Bold"
+                               TextColor="#123026" />
+
+                        <Label x:Name="LabelRiskScore"
+                               Text="Skor risiko gabungan: 0%"
+                               FontSize="14"
+                               FontAttributes="Bold"
+                               TextColor="#17663A" />
+
+                        <Label x:Name="LabelFuzzyExplanation"
+                               Text="Fuzzy sedang membaca kondisi."
+                               FontSize="13"
+                               TextColor="#5B6B63" />
+
+                        <Label x:Name="LabelNeuralExplanation"
+                               Text="Neural network sedang menghitung pola."
+                               FontSize="13"
+                               TextColor="#5B6B63" />
+
+                        <Label x:Name="LabelRecommendation"
+                               Text="Saran tindakan akan muncul di sini."
+                               FontSize="14"
+                               FontAttributes="Bold"
+                               TextColor="#123026" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border x:Name="GeminiChatPanel"
+                        BackgroundColor="White"
+                        Stroke="#DCE5DF"
+                        StrokeThickness="1"
+                        Padding="22"
+                        StrokeShape="RoundRectangle 14">
+                    <VerticalStackLayout Spacing="16">
+                        <Grid ColumnDefinitions="*">
+                            <VerticalStackLayout Spacing="4">
+                                <Label Text="Chatbot AI Warga"
+                                       FontSize="20"
+                                       FontAttributes="Bold"
+                                       TextColor="#123026" />
+
+                                <Label Text="Tanyakan hal yang ingin dipahami tentang status lereng, sensor, atau tindakan aman."
+                                       FontSize="13"
+                                       TextColor="#5B6B63" />
+                            </VerticalStackLayout>
+                        </Grid>
+
+                        <VerticalStackLayout x:Name="GeminiChatMessages"
+                                             Spacing="10" />
+
+                        <Grid ColumnDefinitions="*,Auto"
+                              ColumnSpacing="10">
+                            <Entry x:Name="EntryGeminiQuestion"
+                                   Placeholder="Contoh: Apa yang harus saya lakukan jika status Siaga?"
+                                   BackgroundColor="#F8FAF9"
+                                   TextColor="#123026" />
+
+                            <Button Grid.Column="1"
+                                    Text="Tanya"
+                                    BackgroundColor="#17663A"
+                                    TextColor="White"
+                                    CornerRadius="8"
+                                    Clicked="OnGeminiAskClicked" />
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border BackgroundColor="White"
+                        Stroke="#DCE5DF"
+                        StrokeThickness="1"
+                        Padding="22"
+                        StrokeShape="RoundRectangle 14">
+                    <VerticalStackLayout Spacing="16">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <VerticalStackLayout Spacing="4">
+                                <Label x:Name="LabelNotificationTitle"
+                                       Text="Pemberitahuan"
+                                       FontSize="20"
+                                       FontAttributes="Bold"
+                                       TextColor="#123026" />
+
+                                <Label x:Name="LabelNotificationSummary"
+                                       Text="Riwayat pemberitahuan kondisi lereng."
+                                       FontSize="13"
+                                       TextColor="#5B6B63" />
+                            </VerticalStackLayout>
+
+                            <Button x:Name="BtnNotificationAction"
+                                    Grid.Column="1"
+                                    Text="Kirim Pemberitahuan"
+                                    BackgroundColor="#1D4ED8"
+                                    TextColor="White"
+                                    CornerRadius="8"
+                                    VerticalOptions="Center"
+                                    Clicked="OnNotificationActionClicked" />
+                        </Grid>
+
+                        <BoxView HeightRequest="1"
+                                 Color="#DCE5DF" />
+
+                        <VerticalStackLayout x:Name="NotificationsList"
+                                             Spacing="12" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border BackgroundColor="White"
+                        Stroke="#DCE5DF"
+                        StrokeThickness="1"
+                        Padding="22"
+                        StrokeShape="RoundRectangle 14">
+
+                <VerticalStackLayout Spacing="16">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <VerticalStackLayout Spacing="4">
+                            <Label Text="Laporan dari Warga"
+                                   FontSize="20"
+                                   FontAttributes="Bold"
+                                   TextColor="#123026" />
+
+                            <Label x:Name="LabelReportSummary"
+                                   Text="Ringkasan laporan kondisi lapangan dari warga sekitar."
+                                   FontSize="13"
+                                   TextColor="#5B6B63" />
+                        </VerticalStackLayout>
+
+                        <Button x:Name="BtnReportAction"
+                                Grid.Column="1"
+                                Text="Tambah Laporan"
+                                BackgroundColor="#17663A"
+                                TextColor="White"
+                                CornerRadius="8"
+                                VerticalOptions="Center"
+                                Clicked="OnReportActionClicked" />
+                    </Grid>
+
+                    <BoxView HeightRequest="1"
+                             Color="#DCE5DF" />
+
+                    <VerticalStackLayout x:Name="ReportsList"
+                                         Spacing="12" />
+                </VerticalStackLayout>
+                </Border>
+            </VerticalStackLayout>
+        </Grid>
+    </ScrollView>
+</ContentPage>

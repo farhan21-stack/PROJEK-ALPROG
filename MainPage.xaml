@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FACE.MainPage">
+
+    <Grid>
+        <Frame BackgroundColor="#FFFFFF" 
+               CornerRadius="15" 
+               Padding="40" 
+               HasShadow="True" 
+               HorizontalOptions="Center" 
+               VerticalOptions="Center" 
+               WidthRequest="400">
+
+            <VerticalStackLayout Spacing="20">
+                <Label Text="System Keamanan" 
+                       FontSize="32" 
+                       FontAttributes="Bold" 
+                       HorizontalOptions="Center" 
+                       TextColor="#4B5563" 
+                       Margin="0,0,0,10"/>
+
+                <Label Text="Portal Akses" 
+                       FontSize="16" 
+                       HorizontalOptions="Center" 
+                       TextColor="#4B5563" 
+                       Margin="0,0,0,10"/>
+
+                <Entry x:Name="EntryUsername" 
+                       Placeholder="Masukkan Username" 
+                       BackgroundColor="#F3F4F6" 
+                       TextColor="Black" />
+
+                <Entry x:Name="EntryPassword" 
+                       Placeholder="Masukkan Password" 
+                       IsPassword="True" 
+                       BackgroundColor="#F3F4F6" 
+                       TextColor="Black" />
+
+                <Button Text="MASUK SISTEM" 
+                        FontAttributes="Bold" 
+                        BackgroundColor="#2563EB" 
+                        TextColor="White" 
+                        Clicked="OnLoginClicked" />
+
+                <Button Text="Belum punya akun? Daftar di sini" 
+                        BackgroundColor="Transparent" 
+                        TextColor="#2563EB" 
+                        Clicked="OnGoToRegisterClicked" />
+            </VerticalStackLayout>
+        </Frame>
+    </Grid>
+</ContentPage>
